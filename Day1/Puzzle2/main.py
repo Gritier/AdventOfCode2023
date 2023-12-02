@@ -73,7 +73,6 @@ def analyze_string(string):
             r = numbers[temp[j-4:j]]
         elif temp[j-5:j] in numbers.keys() and len(temp) > (i+5) and r == 0:
             r = numbers[temp[j-5:j]]
-        print(temp[j-5:j])
     if r == 0:
         r = l
     value = int(str(l)+str(r))
