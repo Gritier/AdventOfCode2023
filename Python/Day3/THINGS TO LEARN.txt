@@ -1,0 +1,4 @@
+Modules:
+re, defaultdict.collecitons, math.prod
+
+Map e Filter (You could have used them to find the solution)
