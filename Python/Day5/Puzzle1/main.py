@@ -48,7 +48,8 @@ def get_table(data):
                     table[key][subkeys[1]].append(range(el[1],el[1]+el[2]))
     return table
 
-def get_min_location(values, table, turn=0):
+def get_min_location(values, table, turn=-1):
+    turn += 1
     key = [key for key in table.keys()][turn]
     subkeys = [key for key in table[key].keys()]
     good_idx = []
@@ -60,8 +61,7 @@ def get_min_location(values, table, turn=0):
                 good_idx.append(idx)
         for i in good_idx:
             good_values.append(table[key][subkeys[1]][i])
-    if turn < len(table.keys()):
-        turn += 1
+    if turn < len(table.keys())-1:
         get_min_location(good_values, table, turn)
     else:
         return min(good_values)
