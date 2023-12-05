@@ -48,18 +48,24 @@ def get_table(data):
                     table[key][subkeys[1]].append(range(el[1],el[1]+el[2]))
     return table
 
-def starting_confront(value, key, table):
+def confront(values, key, table):
     subkeys = table[key].keys()
     good_idx = []
-    
-    for idx,el in enumerate(table[key][subkeys[0]]):
-        if value in el:
-            good_idx.append(idx)
-    
-
+    good_values = []
+    for value in values:
+        for idx,el in enumerate(table[key][subkeys[0]]):
+            if value in el:
+                good_idx.append(idx)
+        for i in good_idx:
+            good_values = table[key][subkeys[1]][i]
     pass
 
 puzzle = read_file()
 map_data = extract_data(puzzle)
 table = get_table(map_data)
 print(table)
+
+
+for turn in range(len(map_data.keys())):
+
+    confront()
