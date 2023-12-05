@@ -1,0 +1,5 @@
+Usa le classi e usale bene!
+Funzione next()
+guardati la documentazione delle Liste e dei Set: Che differenza c'è?
+Come funzionano le map?
+ricordati di poter assegnare più valori a variabile da una stessa riga di codice e da uno stesso return

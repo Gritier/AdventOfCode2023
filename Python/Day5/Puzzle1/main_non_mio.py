@@ -1,5 +1,5 @@
+#GRAZIE REDDIT, codice copiato e ritoccato per capire come cavolo si fan ste cose
 from typing import List, Set
-import re
 
 # Represents one specific map
 class Interval:
@@ -65,7 +65,7 @@ class IntervalList:
 def read_file(file="input.txt"):
     with open(file,"r") as f:
         return f.read()
-    
+
 def parse_input(input):
     input += '\n'
     lines = iter(input.split('\n'))
