@@ -48,24 +48,26 @@ def get_table(data):
                     table[key][subkeys[1]].append(range(el[1],el[1]+el[2]))
     return table
 
-def confront(values, key, table):
-    subkeys = table[key].keys()
+def get_min_location(values, table, turn=0):
+    key = [key for key in table.keys()][turn]
+    subkeys = [key for key in table[key].keys()]
     good_idx = []
     good_values = []
+    print(f'{key}: {time.time()-start_time}')
     for value in values:
         for idx,el in enumerate(table[key][subkeys[0]]):
             if value in el:
                 good_idx.append(idx)
         for i in good_idx:
-            good_values = table[key][subkeys[1]][i]
-    pass
+            good_values.append(table[key][subkeys[1]][i])
+    if turn < len(table.keys()):
+        turn += 1
+        get_min_location(good_values, table, turn)
+    else:
+        return min(good_values)
+    
 
 puzzle = read_file()
 map_data = extract_data(puzzle)
 table = get_table(map_data)
-print(table)
-
-
-for turn in range(len(map_data.keys())):
-
-    confront()
+print(get_min_location(map_data['seeds'],table))
