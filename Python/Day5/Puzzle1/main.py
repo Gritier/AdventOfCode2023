@@ -37,7 +37,6 @@ def extract_data(puzzle):
 def get_table(data):
     table = {}
     for idx,key in enumerate(data.keys()):
-        print(f'{key}: {time.time()-start_time}')
         if idx != 0:
             table[key]= {}
             subkeys = [key.split("-")[0],key.split("-")[2].split(" ")[0]]
@@ -45,13 +44,22 @@ def get_table(data):
             table[key][subkeys[1]] = []
             for el in data[key]:
                 if len(el)>0:
-                    table[key][subkeys[0]] = range(el[0],el[0]+el[2])
-                    table[key][subkeys[1]] = range(el[1],el[1]+el[2])
+                    table[key][subkeys[0]].append(range(el[0],el[0]+el[2]))
+                    table[key][subkeys[1]].append(range(el[1],el[1]+el[2]))
     return table
 
-def confront(table):
+def starting_confront(value, key, table):
+    subkeys = table[key].keys()
+    good_idx = []
+    
+    for idx,el in enumerate(table[key][subkeys[0]]):
+        if value in el:
+            good_idx.append(idx)
+    
+
     pass
 
 puzzle = read_file()
 map_data = extract_data(puzzle)
 table = get_table(map_data)
+print(table)
