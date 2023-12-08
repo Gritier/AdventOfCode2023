@@ -1,0 +1,81 @@
+from collections import defaultdict, Counter
+FILE = "input.txt"
+EXAMPLE = "32T3K 765\nT55J5 684\nKK677 28\nKTJJT 220\nQQQJA 483" 
+
+class Hand:
+    def __init__(self,cards,bid):
+        self.cards = self.convert_cards(cards)
+        self.bid = bid
+        self.strenght = self.calc_strenght()
+    
+    def __str__(self):
+        return f'Cards: {self.cards} | Bid: {self.bid}'
+    
+    def convert_cards(self, cards):
+        new_set = []
+        for card in cards:
+            if card.isdigit():
+                new_set.append(int(card))
+            elif card == 'T':
+                new_set.append(10)
+            elif card == 'J':
+                new_set.append(11)
+            elif card == 'Q':
+                new_set.append(12)
+            elif card == 'K':
+                new_set.append(13)
+            elif card == 'A':
+                new_set.append(14)
+        new_set.sort()
+        return new_set
+    
+    def calc_strenght(self):
+        cards = Counter(self.cards)
+        if list(cards.values()) == [5]:
+            return 7
+        elif sorted(cards.values()) == [1,4]:
+            return 6
+        elif sorted(cards.values()) == [2,3]:
+            return 5
+        elif sorted(cards.values()) == [1,1,3]:
+            return 4
+        elif sorted(cards.values()) == [1,2,2]:
+            return 3
+        elif sorted(cards.values()) == [1,1,1,2]:
+            return 2
+        elif sorted(cards.values()) == [1,1,1,1,1]:
+            return 1
+        else:
+            return 0 
+    
+def sort_hands(hands):
+    hands.sort(key=lambda hand: hand.strenght)
+    return hands
+
+#def read_input(file=FILE):
+ #   with open(file, "r") as f:
+  #      return f.read()
+
+def parse_input(puzzle ):#= read_input()):
+    return [Hand(line.split(" ")[0],line.split(" ")[1]) for line in puzzle.split('\n')]     
+
+def inner_sort(hands):
+    ordered_hands = []
+    break_idx = [0]
+    for idx, hand in enumerate(hands):
+        if hands.strenght != hands[idx + 1].strenght:
+            break_idx.append(idx+1)
+        if len(break_idx) == 7 or idx == len(hands)-1:
+            break
+    i = 0
+    for idx in break_idx:
+        subhands = hands[i:idx]
+        i = idx
+        for hand in hands:
+            pass
+
+    
+
+
+for el in sort_hands(parse_input(EXAMPLE)):
+    print(el)
